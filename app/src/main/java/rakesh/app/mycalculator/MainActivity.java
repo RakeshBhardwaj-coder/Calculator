@@ -150,7 +150,12 @@ public class MainActivity extends AppCompatActivity {
         double result = exp.calculate();
 //        DecimalFormat format = new DecimalFormat();
 //        format.setDecimalSeparatorAlwaysShown(false);
-        calculatedResult.setText("= " + result);
+        if(result % 1 == 0 ){
+            calculatedResult.setText("= " + (int) result);
+        }else{
+            calculatedResult.setText("= " + result);
+        }
+
         display.setText(" ");
 //            display.setSelection(String.valueOf(result).length());
 
