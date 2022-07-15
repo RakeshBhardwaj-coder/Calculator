@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         display.setText(String.format("%s%s%s",leftStr,strToAdd,rightStr));
         display.setSelection(cursurPos + 1);
 
+
     }
     public void clearBtn(View view){
         display.setText("");
