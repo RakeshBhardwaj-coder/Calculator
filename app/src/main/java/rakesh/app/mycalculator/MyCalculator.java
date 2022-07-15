@@ -2,8 +2,11 @@ package rakesh.app.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +26,34 @@ public class MyCalculator extends AppCompatActivity {
         expression = findViewById((R.id.preCalculation));
         calculatedResult = findViewById(R.id.calculatedResult);
         display.setShowSoftInputOnFocus(false);
+
+        display.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                display.setTextColor(Color.BLACK);
+                display.setTextSize(32.0f);
+                calculatedResult.setTextColor(Color.GRAY);
+                calculatedResult.setTextSize(28.0f);
+                String userExp = display.getText().toString();
+                Expression exp = new Expression(userExp);
+                double result = exp.calculate();
+                if(result % 1 == 0 ){
+                    calculatedResult.setText("= " + (int) result);
+                }else{
+                    calculatedResult.setText("= " + result);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void updateText(String strToAdd){
@@ -38,7 +69,8 @@ public class MyCalculator extends AppCompatActivity {
     public void clearBtn(View view){
         display.setText("");
         expression.setText("");
-        calculatedResult.setText("");
+        calculatedResult.setText("0");
+        calculatedResult.setTextColor(Color.BLACK);
     }
 
     public void zeroBtn(View view ){
@@ -135,27 +167,10 @@ public class MyCalculator extends AppCompatActivity {
     }
 
     public void equalsBtn(View view){
-        String userExp = display.getText().toString();
-//    userExp = userExp.replaceAll("%","/");
-//    userExp = userExp.replaceAll("","*");
-
-        String preCalcuation = userExp; //this will take previous expression to show.
-
-        Expression exp = new Expression(preCalcuation);
-        expression.setText(preCalcuation);
-
-        double result = exp.calculate();
-//        DecimalFormat format = new DecimalFormat();
-//        format.setDecimalSeparatorAlwaysShown(false);
-        if(result % 1 == 0 ){
-            calculatedResult.setText("= " + (int) result);
-        }else{
-            calculatedResult.setText("= " + result);
-        }
-
-        display.setText(" ");
-//            display.setSelection(String.valueOf(result).length());
-
+        display.setTextSize(28.0f);
+        display.setTextColor(Color.GRAY);
+        calculatedResult.setTextSize(40.0f);
+        calculatedResult.setTextColor(Color.BLACK);
 
     }
 }
