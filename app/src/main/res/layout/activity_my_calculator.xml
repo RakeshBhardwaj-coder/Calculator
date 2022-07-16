@@ -22,6 +22,16 @@
             android:minHeight="50dp"
             android:textAlignment="textEnd"
             android:textSize="28sp"></TextView>
+
+        <TextView
+            android:id="@+id/calculatedResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:textAlignment="textEnd"
+            android:text =""
+            android:textColor="@color/black"
+            android:textSize="32sp" />
         <EditText
             android:cursorVisible="false"
             android:id="@+id/input"
@@ -31,16 +41,8 @@
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="28sp"
+            android:text=""
             tools:ignore="SpeakableTextPresentCheck"></EditText>
-        <TextView
-            android:id="@+id/calculatedResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:textAlignment="textEnd"
-            android:text ="0"
-            android:textColor="@color/black"
-            android:textSize="32sp" />
         <View
             android:layout_height="1dp"
             android:layout_width="wrap_content"
@@ -123,7 +125,7 @@
                 android:minHeight="80dp"
                 android:layout_weight = "1"
                 android:background="@color/backgroudButtonColor"
-                android:onClick="eightBtn"
+                android:onClick="sevenBtn"
                 android:text="7"
                 android:textColor="#333"
                 android:textSize="30sp"

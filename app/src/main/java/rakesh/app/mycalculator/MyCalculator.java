@@ -27,6 +27,8 @@ public class MyCalculator extends AppCompatActivity {
         calculatedResult = findViewById(R.id.calculatedResult);
         display.setShowSoftInputOnFocus(false);
 
+
+
         display.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -35,17 +37,30 @@ public class MyCalculator extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                display.setTextColor(Color.BLACK);
-                display.setTextSize(32.0f);
-                calculatedResult.setTextColor(Color.GRAY);
-                calculatedResult.setTextSize(28.0f);
-                String userExp = display.getText().toString();
-                Expression exp = new Expression(userExp);
-                double result = exp.calculate();
-                if(result % 1 == 0 ){
-                    calculatedResult.setText("= " + (int) result);
-                }else{
-                    calculatedResult.setText("= " + result);
+                try{
+
+                  if(!display.getText().toString().isEmpty()){
+                      expression.setText("");
+                      display.setTextColor(Color.BLACK);
+                      display.setTextSize(32.0f);
+                      calculatedResult.setTextColor(Color.GRAY);
+                      calculatedResult.setTextSize(28.0f);
+                      String userExp = display.getText().toString();
+                      Expression exp = new Expression(userExp);
+                      double result = exp.calculate();
+
+
+                      if(!Double.isNaN(result)){
+                          if(result % 1 == 0){
+                              calculatedResult.setText("= " + (int) result);
+                          }else{
+                              calculatedResult.setText("= " + result);
+                          }
+                      }
+
+                  }
+                }catch(Exception e){
+System.out.println("error : " +e);
                 }
             }
 
@@ -65,11 +80,12 @@ public class MyCalculator extends AppCompatActivity {
         display.setSelection(cursurPos + 1);
 
 
+
     }
     public void clearBtn(View view){
         display.setText("");
         expression.setText("");
-        calculatedResult.setText("0");
+        calculatedResult.setText("");
         calculatedResult.setTextColor(Color.BLACK);
     }
 
@@ -167,10 +183,21 @@ public class MyCalculator extends AppCompatActivity {
     }
 
     public void equalsBtn(View view){
-        display.setTextSize(28.0f);
-        display.setTextColor(Color.GRAY);
-        calculatedResult.setTextSize(40.0f);
-        calculatedResult.setTextColor(Color.BLACK);
+
+        if(display.getText().toString().isEmpty()){
+            return;
+        }else {
+
+            display.setTextSize(28.0f);
+            display.setTextColor(Color.GRAY);
+            calculatedResult.setTextSize(35.0f);
+            calculatedResult.setTextColor(Color.BLACK);
+            expression.setText(display.getText().toString());
+            display.setText("");
+
+
+        }
+
 
     }
 }
